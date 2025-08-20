@@ -18,9 +18,6 @@ TSN Asia Assessment Backend is a RESTful API service for managing assessment for
 ### Prerequisites
 - [Node.js](https://nodejs.org/) (v18 or above)
 - [Docker](https://www.docker.com/get-started)
-- [Git](https://git-scm.com/)
-
-### Installation
 
 1. **Clone the repository:**
    ```sh
@@ -40,93 +37,31 @@ TSN Asia Assessment Backend is a RESTful API service for managing assessment for
 4. **Access the API:**
    The backend will be running at `http://localhost:5000` (or the port specified in `.env`).
 
+
 ### Manual Local Development (without Docker)
 
 1. Install dependencies:
    ```sh
    npm install
    ```
-2. Build TypeScript:
+
+2. Copy `.env.example` to `.env` and adjust values as needed:
+   ```sh
+   cp .env.example .env
+   # Edit .env with your preferred values
+   ```
+
+3. Build TypeScript:
    ```sh
    npm run build
    ```
-3. Start the server:
+
+4. Start the server:
    ```sh
    npm start
    ```
 
-## Example API Usage
-
-## Simple API Documentation
-
-### Get All Assessments
-**Endpoint:** `GET /api/assessment`
-**Response:**
-```json
-[
-   {
-      "id": 1,
-      "title": "Customer Satisfaction Survey",
-      "description": "Survey for 2025 Q3",
-      "createdAt": "2025-08-20T13:30:00.000Z"
-   },
-   // ...more assessments
-]
-```
-
-### Get Assessment Detail
-**Endpoint:** `GET /api/assessment/:id`
-**Response:**
-```json
-{
-   "id": 1,
-   "title": "Customer Satisfaction Survey",
-   "description": "Survey for 2025 Q3",
-   "questions": [
-      {
-         "id": 101,
-         "text": "How satisfied are you with our service?",
-         "type": "rating",
-         "options": [1, 2, 3, 4, 5]
-      }
-   ],
-   "createdAt": "2025-08-20T13:30:00.000Z"
-}
-```
-
-### Create Assessment
-**Endpoint:** `POST /api/assessment`
-**Request Body:**
-```json
-{
-   "title": "Customer Satisfaction Survey",
-   "description": "Survey for 2025 Q3",
-   "questions": [
-      {
-         "text": "How satisfied are you with our service?",
-         "type": "rating",
-         "options": [1, 2, 3, 4, 5]
-      }
-   ]
-}
-```
-**Response:**
-```json
-{
-   "id": 1,
-   "title": "Customer Satisfaction Survey",
-   "description": "Survey for 2025 Q3",
-   "questions": [
-      {
-         "id": 101,
-         "text": "How satisfied are you with our service?",
-         "type": "rating",
-         "options": [1, 2, 3, 4, 5]
-      }
-   ],
-   "createdAt": "2025-08-20T13:30:00.000Z"
-}
-```
+The backend will be running at `http://localhost:5000` (or the port specified in your `.env`).
 
 ## License
 
