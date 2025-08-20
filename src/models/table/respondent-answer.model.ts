@@ -1,7 +1,7 @@
 import { DataTypes, Model } from "sequelize";
 import QuestionModel from "./question.model";
 import RespondentModel from "./respondent.model";
-import database from "config/database";
+import database from "@config/database";
 
 class RespondentAnswerModel extends Model {
   declare id: number;

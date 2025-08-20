@@ -1,8 +1,8 @@
-import database from "config/database";
-import { AssessmentCreateDto } from "models/dtos/assessment-create.dto";
-import { IAssessmentCreateResponse } from "models/response/assessment-create.response";
-import { IAssessmentDetailResponse } from "models/response/assessment-detail.response";
-import { IAssessmentResponse } from "models/response/assessment.response";
+import database from "@config/database";
+import { AssessmentCreateDto } from "@models/dtos/assessment-create.dto";
+import { IAssessmentCreateResponse } from "@models/response/assessment-create.response";
+import { IAssessmentDetailResponse } from "@models/response/assessment-detail.response";
+import { IAssessmentResponse } from "@models/response/assessment.response";
 import {
   TemplateModel,
   QuestionCategoryModel,
@@ -11,7 +11,7 @@ import {
   RespondentModel,
   RespondentAnswerModel,
   RespondentSummaryModel,
-} from "models/table";
+} from "@models/table";
 import { Op } from "sequelize";
 
 interface IAssessmentService {

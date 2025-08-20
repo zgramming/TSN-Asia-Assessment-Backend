@@ -1,7 +1,7 @@
 {
   // Visit https://aka.ms/tsconfig to read more about this file
   "compilerOptions": {
-    "baseUrl": "./src",
+  "baseUrl": ".",
     // File Layout
     "rootDir": "./src",
     "outDir": "./dist",
@@ -11,13 +11,14 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "paths": {
-      "@config/*": ["./src/config/*"],
-      "@models/*" :["./src/models/*"],
-      "@services/*":["./src/services/*"],
-      "@controllers/*": ["./src/controllers/*"],
-      "@middlewares/*": ["./src/middlewares/*"],
-      "@utils/*": ["./src/utils/*"],
-      "@routes/*": ["./src/routes/*"],
+  "@config/*": ["src/config/*"],
+  "config/*": ["config/*"],
+  "@models/*": ["src/models/*"],
+  "@services/*": ["src/services/*"],
+  "@controllers/*": ["src/controllers/*"],
+  "@middlewares/*": ["src/middlewares/*"],
+  "@utils/*": ["src/utils/*"],
+  "@routes/*": ["src/routes/*"],
     }
   },
   // "include": ["./src/**/*"],

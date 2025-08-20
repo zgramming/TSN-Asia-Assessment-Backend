@@ -1,5 +1,5 @@
 import { DataTypes, Model } from "sequelize";
-import database from "config/database";
+import database from "@config/database";
 import QuestionModel from "./question.model";
 import { TemplateModel } from "./template.model";
 

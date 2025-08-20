@@ -1,6 +1,6 @@
 import { DataTypes, Model } from "sequelize";
 import QuestionModel from "./question.model";
-import database from "config/database";
+import database from "@config/database";
 
 class QuestionOptionModel extends Model {
   declare id: number;

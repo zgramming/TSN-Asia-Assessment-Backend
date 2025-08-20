@@ -1,8 +1,8 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import database from "config/database";
-import AssessmentRoute from "routes/assessment.route";
+import database from "@config/database";
+import AssessmentRoute from "@routes/assessment.route";
 import "./models/table/index";
 
 dotenv.config();

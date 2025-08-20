@@ -1,5 +1,5 @@
 import { DataTypes, Model } from "sequelize";
-import database from "config/database";
+import database from "@config/database";
 import QuestionCategoryModel from "./question-category.model";
 import QuestionOptionModel from "./question-option.model";
 import { TemplateModel } from "./template.model";
@@ -72,7 +72,6 @@ QuestionModel.init(
     updatedAt: "updated_at",
   }
 );
-
 
 // QuestionModel.sync();
 

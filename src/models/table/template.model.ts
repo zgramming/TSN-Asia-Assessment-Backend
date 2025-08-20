@@ -1,4 +1,4 @@
-import database from "config/database";
+import database from "@config/database";
 import { DataTypes, Model } from "sequelize";
 import QuestionCategoryModel from "./question-category.model";
 import RespondentModel from "./respondent.model";
