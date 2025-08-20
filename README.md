@@ -34,35 +34,69 @@ TSN Asia Assessment Backend is a RESTful API service for managing assessment for
    ```
    This will start both the backend service and a PostgreSQL database.
 
-4. **Access the API:**
-   The backend will be running at `http://localhost:5000` (or the port specified in `.env`).
 
+# TSN Asia Assessment Backend
 
-### Manual Local Development (without Docker)
+## Project Overview
+TSN Asia Assessment Backend is a RESTful API service for managing assessment forms, questions, and responses. Built with Node.js, TypeScript, Express, Sequelize ORM, and PostgreSQL. The backend is fully dockerized and supports local development with path aliases using `tsx`.
 
-1. Install dependencies:
+## Tech Stack
+- Node.js
+- TypeScript
+- Express.js
+- Sequelize (ORM)
+- PostgreSQL
+- Docker & Docker Compose
+- tsx (runtime for TypeScript)
+
+## Getting Started (from scratch)
+
+### Prerequisites
+- [Node.js](https://nodejs.org/) (v18 or above)
+- [PostgreSQL](https://www.postgresql.org/) (local or Docker)
+- [Git](https://git-scm.com/)
+
+### Installation Steps
+
+1. **Clone the repository:**
+   ```sh
+   git clone https://github.com/zgramming/TSN-Asia-Assessment-Backend.git
+   cd TSN-Asia-Assessment-Backend
+   ```
+
+2. **Install dependencies:**
    ```sh
    npm install
    ```
 
-2. Copy `.env.example` to `.env` and adjust values as needed:
+3. **Copy and configure environment variables:**
    ```sh
    cp .env.example .env
-   # Edit .env with your preferred values
+   # Edit .env with your database credentials and preferred settings
    ```
 
-3. Build TypeScript:
+4. **Run database migrations and seeders:**
    ```sh
-   npm run build
+   npx sequelize-cli db:migrate
+   npx sequelize-cli db:seed:all
    ```
+   This will create the necessary tables and insert starter data.
 
-4. Start the server:
+5. **Start the backend server (with automatic reload):**
    ```sh
-   npm start
+   npm run dev
    ```
+   The server will run at `http://localhost:5000` (or the port specified in your `.env`).
 
-The backend will be running at `http://localhost:5000` (or the port specified in your `.env`).
+### Troubleshooting
+- Make sure your PostgreSQL server is running and accessible with the credentials in `.env`.
+- If you use Docker, update your `.env` to use the Docker service name for `DB_HOST` (e.g., `db`).
+
+## Useful Commands
+- **Run migrations:** `npx sequelize-cli db:migrate`
+- **Run all seeders:** `npx sequelize-cli db:seed:all`
+- **Undo last migration:** `npx sequelize-cli db:migrate:undo`
+- **Undo all seeders:** `npx sequelize-cli db:seed:undo:all`
 
 ## License
-
 MIT
