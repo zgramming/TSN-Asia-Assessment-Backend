@@ -56,6 +56,7 @@ TSN Asia Assessment Backend is a RESTful API service for managing assessment for
 - [PostgreSQL](https://www.postgresql.org/) (local or Docker)
 - [Git](https://git-scm.com/)
 
+
 ### Installation Steps
 
 1. **Clone the repository:**
@@ -75,14 +76,22 @@ TSN Asia Assessment Backend is a RESTful API service for managing assessment for
    # Edit .env with your database credentials and preferred settings
    ```
 
-4. **Run database migrations and seeders:**
+4. **Create the database manually:**
+   - Open your PostgreSQL client (psql, PgAdmin, DBeaver, etc.)
+   - Run the following command to create the database:
+     ```sql
+     CREATE DATABASE tsn-assessment;
+     ```
+   - Make sure your `.env` matches the database name and credentials.
+
+5. **Run database migrations and seeders:**
    ```sh
    npx sequelize-cli db:migrate
    npx sequelize-cli db:seed:all
    ```
    This will create the necessary tables and insert starter data.
 
-5. **Start the backend server (with automatic reload):**
+6. **Start the backend server (with automatic reload):**
    ```sh
    npm run dev
    ```
