@@ -2,6 +2,7 @@ import database from "@config/database";
 import { AssessmentCreateDto } from "@models/dtos/assessment-create.dto";
 import { IAssessmentCreateResponse } from "@models/response/assessment-create.response";
 import { IAssessmentDetailResponse } from "@models/response/assessment-detail.response";
+import { IAssessmentSummaryResponse } from "@models/response/assessment-sumary.response";
 import { IAssessmentResponse } from "@models/response/assessment.response";
 import {
   TemplateModel,
@@ -17,14 +18,17 @@ import { Op } from "sequelize";
 interface IAssessmentService {
   create(data: AssessmentCreateDto): Promise<IAssessmentCreateResponse>;
   get(): Promise<IAssessmentResponse[]>;
-  getDetail(id: number): Promise<IAssessmentDetailResponse>;
+  getDetail(code: string): Promise<IAssessmentDetailResponse>;
 }
 
 export class AssessmentService implements IAssessmentService {
   async create(data: AssessmentCreateDto): Promise<IAssessmentCreateResponse> {
+    console.log({ data });
+
     try {
-      await database.transaction(async (t) => {
+      const resultRespondent = await database.transaction(async (t) => {
         const respondent = await RespondentModel.create({
+          template_id: data.assessment.template_id,
           first_name: data.profile.first_name,
           last_name: data.profile.last_name,
           department: data.profile.department,
@@ -82,7 +86,7 @@ export class AssessmentService implements IAssessmentService {
         const percentagePoint =
           maxPoint > 0 ? (earnedPoint / maxPoint) * 100 : 0;
 
-        const insertSummary = await RespondentSummaryModel.create({
+        await RespondentSummaryModel.create({
           respondent_id: respondent.id,
           max_point: maxPoint,
           earned_point: earnedPoint,
@@ -90,12 +94,19 @@ export class AssessmentService implements IAssessmentService {
           average_point: avg,
         });
 
-        return insertSummary;
+        return respondent;
       });
 
       const result: IAssessmentCreateResponse = {
         message: "Assessment created successfully",
         is_success: true,
+        data: {
+          respondent_id: resultRespondent.id,
+          first_name: data.profile.first_name,
+          last_name: data.profile.last_name,
+          department: data.profile.department,
+          years_working: data.profile.years_working,
+        },
       };
       return result;
     } catch (error) {
@@ -116,11 +127,11 @@ export class AssessmentService implements IAssessmentService {
     }));
     return x;
   }
-  async getDetail(id: number): Promise<IAssessmentDetailResponse> {
-    const result = await TemplateModel.findByPk(id);
+  async getDetail(code: string): Promise<IAssessmentDetailResponse> {
+    const result = await TemplateModel.findOne({ where: { code } });
     if (!result) throw new Error("Template not found");
     const categories = await QuestionCategoryModel.findAll({
-      where: { template_id: id },
+      where: { template_id: result.id },
       order: [["display_order", "ASC"]],
       include: [
         {
@@ -172,5 +183,42 @@ export class AssessmentService implements IAssessmentService {
     };
 
     return item;
+  }
+
+  async getSummary(respondentId: string): Promise<IAssessmentSummaryResponse> {
+    const summary = await RespondentSummaryModel.findOne({
+      where: { respondent_id: respondentId },
+      include: [
+        {
+          model: RespondentModel,
+          as: "respondent",
+          attributes: [
+            "id",
+            "first_name",
+            "last_name",
+            "department",
+            "years_working",
+          ],
+        },
+      ],
+    });
+    if (!summary) throw new Error("Summary not found");
+
+    return {
+      id: summary.id,
+      created_at: summary.created_at,
+      respondent_id: summary.respondent_id,
+      max_point: summary.max_point,
+      earned_point: summary.earned_point,
+      percentage_point: summary.percentage_point,
+      average_point: summary.average_point,
+      respondent: {
+        id: summary?.respondent?.id,
+        first_name: summary?.respondent?.first_name,
+        last_name: summary?.respondent?.last_name,
+        department: summary?.respondent?.department,
+        years_working: summary?.respondent?.years_working,
+      },
+    };
   }
 }

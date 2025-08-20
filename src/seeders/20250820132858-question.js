@@ -59,6 +59,17 @@ module.exports = {
         created_at: new Date(),
         updated_at: new Date(),
       },
+      {
+        id: 5,
+        template_id: 2,
+        category_id: 4,
+        label: "How do you rate your team's performance?",
+        type: "rating",
+        max_weight_value: 10,
+        display_order: 3,
+        created_at: new Date(),
+        updated_at: new Date(),
+      },
     ]);
   },
 

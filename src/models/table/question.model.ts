@@ -51,7 +51,7 @@ QuestionModel.init(
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        isIn: [["text", "radio", "checkbox", "dropdown", "number"]],
+        isIn: [["radio", "dropdown", "rating"]],
       },
     },
     max_weight_value: {

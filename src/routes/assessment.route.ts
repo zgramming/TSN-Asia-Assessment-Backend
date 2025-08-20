@@ -6,7 +6,8 @@ const controller = new AssessmentController();
 
 router.get("/", controller.get);
 
-router.get("/:id", controller.getDetail);
+router.get("/:code", controller.getDetail);
+router.get("/summary/:respondentId", controller.getSummary);
 
 router.post("/", controller.create);
 
